@@ -52,7 +52,7 @@ router.get('/', authMiddleware, async (req: Request, res: Response): Promise<voi
       res.status(403).json({ message: 'Not authorized' });
       return;
     }
-    const requests = await BookRequest.find().populate('user', 'username email').populate('book');
+    const requests = await BookRequest.find().populate('user', 'firstName lastName email').populate('book');
     res.json(requests);
   } catch (error) {
     res.status(500).json({ message: 'Server error' });

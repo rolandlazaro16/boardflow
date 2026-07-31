@@ -97,7 +97,7 @@ export default function AdminDashboard() {
           <tbody>
             {requests.map(req => (
               <tr key={req._id}>
-                <td>{req.user?.username} ({req.user?.email})</td>
+                <td>{req.user?.firstName} {req.user?.lastName} ({req.user?.email})</td>
                 <td>{req.book?.title}</td>
                 <td className={
                   req.status === 'approved' ? styles.statusApproved : 

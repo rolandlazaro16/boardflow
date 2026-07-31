@@ -5,7 +5,11 @@ import { useRouter } from 'next/navigation';
 import styles from './page.module.css';
 
 export default function RegisterPage() {
-  const [username, setUsername] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [middleName, setMiddleName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [dateOfBirth, setDateOfBirth] = useState('');
+  const [contact, setContact] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('user');
@@ -20,7 +24,7 @@ export default function RegisterPage() {
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api'}/auth/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, email, password, role }),
+        body: JSON.stringify({ firstName, middleName, lastName, dateOfBirth, contact, email, password, role }),
       });
       
       if (!response.ok) {
@@ -49,8 +53,24 @@ export default function RegisterPage() {
         {error && <p className={styles.error}>{error}</p>}
         <form onSubmit={handleRegister}>
           <div className={styles.formGroup}>
-            <label className={styles.label}>Username</label>
-            <input className={styles.input} type="text" value={username} onChange={e => setUsername(e.target.value)} required />
+            <label className={styles.label}>First Name</label>
+            <input className={styles.input} type="text" value={firstName} onChange={e => setFirstName(e.target.value)} required />
+          </div>
+          <div className={styles.formGroup}>
+            <label className={styles.label}>Middle Name</label>
+            <input className={styles.input} type="text" value={middleName} onChange={e => setMiddleName(e.target.value)} />
+          </div>
+          <div className={styles.formGroup}>
+            <label className={styles.label}>Last Name</label>
+            <input className={styles.input} type="text" value={lastName} onChange={e => setLastName(e.target.value)} required />
+          </div>
+          <div className={styles.formGroup}>
+            <label className={styles.label}>Date of Birth</label>
+            <input className={styles.input} type="date" value={dateOfBirth} onChange={e => setDateOfBirth(e.target.value)} required />
+          </div>
+          <div className={styles.formGroup}>
+            <label className={styles.label}>Contact</label>
+            <input className={styles.input} type="text" value={contact} onChange={e => setContact(e.target.value)} required />
           </div>
           <div className={styles.formGroup}>
             <label className={styles.label}>Email</label>

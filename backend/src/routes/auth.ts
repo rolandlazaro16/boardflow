@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.post('/register', async (req: Request, res: Response): Promise<void> => {
   try {
-    const { username, email, password, role } = req.body;
+    const { firstName, middleName, lastName, dateOfBirth, contact, email, password, role } = req.body;
     
     let user = await User.findOne({ email });
     if (user) {
@@ -19,7 +19,11 @@ router.post('/register', async (req: Request, res: Response): Promise<void> => {
     const hashedPassword = await bcrypt.hash(password, salt);
 
     user = new User({
-      username,
+      firstName,
+      middleName,
+      lastName,
+      dateOfBirth,
+      contact,
       email,
       password: hashedPassword,
       role: role || 'user'
@@ -30,7 +34,7 @@ router.post('/register', async (req: Request, res: Response): Promise<void> => {
     const payload = { id: user.id, role: user.role };
     const token = jwt.sign(payload, process.env.JWT_SECRET || 'secret', { expiresIn: '1d' });
 
-    res.status(201).json({ token, user: { id: user.id, username: user.username, role: user.role } });
+    res.status(201).json({ token, user: { id: user.id, firstName: user.firstName, lastName: user.lastName, role: user.role } });
   } catch (error) {
     res.status(500).json({ message: 'Server error' });
   }
@@ -55,7 +59,7 @@ router.post('/login', async (req: Request, res: Response): Promise<void> => {
     const payload = { id: user.id, role: user.role };
     const token = jwt.sign(payload, process.env.JWT_SECRET || 'secret', { expiresIn: '1d' });
 
-    res.json({ token, user: { id: user.id, username: user.username, role: user.role } });
+    res.json({ token, user: { id: user.id, firstName: user.firstName, lastName: user.lastName, role: user.role } });
   } catch (error) {
     res.status(500).json({ message: 'Server error' });
   }
