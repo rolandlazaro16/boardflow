@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import styles from './page.module.css';
 
 export default function RegisterPage() {
@@ -88,9 +89,12 @@ export default function RegisterPage() {
             </select>
           </div>
           <button className={styles.button} type="submit">Register</button>
-          <p style={{ marginTop: '1rem', textAlign: 'center' }}>
-            Already have an account? <a href="/login" style={{ color: '#0070f3', textDecoration: 'underline' }}>Login</a>
-          </p>
+          <div style={{ marginTop: '1.5rem', textAlign: 'center', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+            <p style={{ color: '#555' }}>
+              Already have an account? <Link href="/login" style={{ color: '#0070f3', textDecoration: 'none', fontWeight: 'bold' }}>Login Here</Link>
+            </p>
+            <Link href="/" style={{ color: '#666', textDecoration: 'underline', fontSize: '0.9rem' }}>Back to Home</Link>
+          </div>
         </form>
       </div>
     </div>

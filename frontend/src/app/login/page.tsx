@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import styles from '../register/page.module.css';
 
 export default function LoginPage() {
@@ -55,9 +56,12 @@ export default function LoginPage() {
             <input className={styles.input} type="password" value={password} onChange={e => setPassword(e.target.value)} required />
           </div>
           <button className={styles.button} type="submit">Login</button>
-          <p style={{ marginTop: '1rem', textAlign: 'center' }}>
-            Don't have an account? <a href="/register" style={{ color: '#0070f3', textDecoration: 'underline' }}>Register</a>
-          </p>
+          <div style={{ marginTop: '1.5rem', textAlign: 'center', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+            <p style={{ color: '#555' }}>
+              Don't have an account? <Link href="/register" style={{ color: '#0070f3', textDecoration: 'none', fontWeight: 'bold' }}>Register Here</Link>
+            </p>
+            <Link href="/" style={{ color: '#666', textDecoration: 'underline', fontSize: '0.9rem' }}>Back to Home</Link>
+          </div>
         </form>
       </div>
     </div>
