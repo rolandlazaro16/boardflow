@@ -2,17 +2,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
+  padding: 2rem 1rem;
   background-color: #f5f5f5;
+  box-sizing: border-box;
 }
 
 .formCard {
   background: white;
-  padding: 2rem;
+  padding: 1.5rem 2rem;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   width: 100%;
-  max-width: 400px;
+  max-width: 450px;
 }
 
 .title {
@@ -22,21 +24,22 @@
 }
 
 .formGroup {
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
 }
 
 .label {
   display: block;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
   color: #555;
+  font-size: 0.9rem;
 }
 
 .input {
   width: 100%;
-  padding: 0.75rem;
+  padding: 0.5rem;
   border: 1px solid #ccc;
   border-radius: 4px;
-  font-size: 1rem;
+  font-size: 0.95rem;
 }
 
 .button {
