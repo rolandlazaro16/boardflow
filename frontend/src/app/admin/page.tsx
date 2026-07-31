@@ -33,7 +33,7 @@ export default function AdminDashboard() {
   useEffect(() => {
     const user = localStorage.getItem('user');
     if (!user) {
-      router.push('/login');
+      router.push('/register');
       return;
     }
     

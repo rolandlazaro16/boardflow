@@ -55,6 +55,9 @@ export default function LoginPage() {
             <input className={styles.input} type="password" value={password} onChange={e => setPassword(e.target.value)} required />
           </div>
           <button className={styles.button} type="submit">Login</button>
+          <p style={{ marginTop: '1rem', textAlign: 'center' }}>
+            Don't have an account? <a href="/register" style={{ color: '#0070f3', textDecoration: 'underline' }}>Register</a>
+          </p>
         </form>
       </div>
     </div>

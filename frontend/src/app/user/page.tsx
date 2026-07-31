@@ -29,7 +29,7 @@ export default function UserDashboard() {
   useEffect(() => {
     const user = localStorage.getItem('user');
     if (!user) {
-      router.push('/login');
+      router.push('/register');
       return;
     }
     

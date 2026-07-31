@@ -88,6 +88,9 @@ export default function RegisterPage() {
             </select>
           </div>
           <button className={styles.button} type="submit">Register</button>
+          <p style={{ marginTop: '1rem', textAlign: 'center' }}>
+            Already have an account? <a href="/login" style={{ color: '#0070f3', textDecoration: 'underline' }}>Login</a>
+          </p>
         </form>
       </div>
     </div>
