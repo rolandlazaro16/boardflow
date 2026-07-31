@@ -7,7 +7,8 @@ import styles from './page.module.css';
 
 interface User {
   _id: string;
-  username: string;
+  firstName: string;
+  lastName: string;
   email: string;
 }
 
