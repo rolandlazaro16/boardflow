@@ -89,11 +89,10 @@ export default function RegisterPage() {
             </select>
           </div>
           <button className={styles.button} type="submit">Register</button>
-          <div style={{ marginTop: '1.5rem', textAlign: 'center', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+          <div style={{ marginTop: '1.5rem', textAlign: 'center' }}>
             <p style={{ color: '#555' }}>
               Already have an account? <Link href="/login" style={{ color: '#0070f3', textDecoration: 'none', fontWeight: 'bold' }}>Login Here</Link>
             </p>
-            <Link href="/" style={{ color: '#666', textDecoration: 'underline', fontSize: '0.9rem' }}>Back to Home</Link>
           </div>
         </form>
       </div>

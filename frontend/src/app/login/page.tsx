@@ -56,11 +56,10 @@ export default function LoginPage() {
             <input className={styles.input} type="password" value={password} onChange={e => setPassword(e.target.value)} required />
           </div>
           <button className={styles.button} type="submit">Login</button>
-          <div style={{ marginTop: '1.5rem', textAlign: 'center', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+          <div style={{ marginTop: '1.5rem', textAlign: 'center' }}>
             <p style={{ color: '#555' }}>
               Don't have an account? <Link href="/register" style={{ color: '#0070f3', textDecoration: 'none', fontWeight: 'bold' }}>Register Here</Link>
             </p>
-            <Link href="/" style={{ color: '#666', textDecoration: 'underline', fontSize: '0.9rem' }}>Back to Home</Link>
           </div>
         </form>
       </div>
