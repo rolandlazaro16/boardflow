@@ -12,6 +12,19 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
+import path from 'path';
+// Serve static files from the 'public' directory
+app.use('/public', express.static(path.join(__dirname, '../public')));
+
+import authRoutes from './routes/auth';
+import bookRoutes from './routes/books';
+import requestRoutes from './routes/requests';
+
+// Routes
+app.use('/api/auth', authRoutes);
+app.use('/api/books', bookRoutes);
+app.use('/api/requests', requestRoutes);
+
 // Basic Route
 app.get('/', (req: Request, res: Response) => {
   res.send('BoardFlow API is running!');

@@ -1,0 +1,75 @@
+'use client';
+
+import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import styles from './page.module.css';
+
+export default function RegisterPage() {
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [role, setRole] = useState('user');
+  const [error, setError] = useState('');
+  const router = useRouter();
+
+  const handleRegister = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError('');
+    
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api'}/auth/register`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, email, password, role }),
+      });
+      
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.message || 'Registration failed');
+      }
+
+      const data = await response.json();
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('user', JSON.stringify(data.user));
+
+      if (data.user.role === 'admin') {
+        router.push('/admin');
+      } else {
+        router.push('/user');
+      }
+    } catch (err: any) {
+      setError(err.message);
+    }
+  };
+
+  return (
+    <div className={styles.container}>
+      <div className={styles.formCard}>
+        <h2 className={styles.title}>Register</h2>
+        {error && <p className={styles.error}>{error}</p>}
+        <form onSubmit={handleRegister}>
+          <div className={styles.formGroup}>
+            <label className={styles.label}>Username</label>
+            <input className={styles.input} type="text" value={username} onChange={e => setUsername(e.target.value)} required />
+          </div>
+          <div className={styles.formGroup}>
+            <label className={styles.label}>Email</label>
+            <input className={styles.input} type="email" value={email} onChange={e => setEmail(e.target.value)} required />
+          </div>
+          <div className={styles.formGroup}>
+            <label className={styles.label}>Password</label>
+            <input className={styles.input} type="password" value={password} onChange={e => setPassword(e.target.value)} required />
+          </div>
+          <div className={styles.formGroup}>
+            <label className={styles.label}>Role</label>
+            <select className={styles.input} value={role} onChange={e => setRole(e.target.value)}>
+              <option value="user">User</option>
+              <option value="admin">Admin</option>
+            </select>
+          </div>
+          <button className={styles.button} type="submit">Register</button>
+        </form>
+      </div>
+    </div>
+  );
+}
