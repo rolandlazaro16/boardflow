@@ -63,3 +63,29 @@
   margin-bottom: 1rem;
   text-align: center;
 }
+
+.passwordWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.togglePasswordButton {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  color: #718096;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  outline: none;
+  transition: color 0.2s;
+}
+
+.togglePasswordButton:hover {
+  color: #2b6cb0;
+}
+
