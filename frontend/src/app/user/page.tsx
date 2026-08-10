@@ -11,6 +11,8 @@ interface Book {
   author: string;
   description: string;
   pdfUrl: string;
+  coverImage?: string;
+  categories?: string[];
 }
 
 interface BookRequest {
@@ -24,6 +26,7 @@ interface BookRequest {
 export default function UserDashboard() {
   const [books, setBooks] = useState<Book[]>([]);
   const [requests, setRequests] = useState<BookRequest[]>([]);
+  const [searchQuery, setSearchQuery] = useState('');
   const router = useRouter();
 
   useEffect(() => {
@@ -84,6 +87,12 @@ export default function UserDashboard() {
     router.push('/login');
   };
 
+  const filteredBooks = books.filter(book =>
+    book.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    book.author.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    (book.categories && book.categories.some(cat => cat.toLowerCase().includes(searchQuery.toLowerCase())))
+  );
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -93,9 +102,9 @@ export default function UserDashboard() {
 
       <div className={styles.section}>
         <h2 className={styles.sectionTitle}>My Requests</h2>
-        <div className={styles.grid}>
+        <div className={styles.requestsGrid}>
           {requests.map(req => (
-            <div key={req._id} className={styles.card}>
+            <div key={req._id} className={styles.requestCard}>
               <h3 className={styles.bookTitle}>{req.book.title}</h3>
               <p className={styles.bookAuthor}>by {req.book.author}</p>
               <p>Status: <span className={req.status === 'approved' ? styles.statusApproved : req.status === 'rejected' ? styles.statusRejected : styles.statusPending}>{req.status.toUpperCase()}</span></p>
@@ -116,24 +125,56 @@ export default function UserDashboard() {
       </div>
 
       <div className={styles.section}>
-        <h2 className={styles.sectionTitle}>Available Books</h2>
-        <div className={styles.grid}>
-          {books.map(book => {
-            const hasRequested = requests.some(r => r.book._id === book._id && !r.returnDate && r.status !== 'rejected');
-            return (
-              <div key={book._id} className={styles.card}>
-                <h3 className={styles.bookTitle}>{book.title}</h3>
-                <p className={styles.bookAuthor}>by {book.author}</p>
-                <button 
-                  className={styles.button} 
-                  onClick={() => handleRequestBook(book._id)}
-                  disabled={hasRequested}
-                >
-                  {hasRequested ? 'Requested' : 'Request Book'}
-                </button>
-              </div>
-            );
-          })}
+        <div className={styles.searchBarContainer}>
+          <input 
+            type="text" 
+            placeholder="Search" 
+            className={styles.searchBar} 
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          <button className={styles.searchButton}>
+            <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" strokeWidth="3" fill="none" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          </button>
+        </div>
+
+        <div className={styles.tableContainer}>
+          <div className={styles.tableHeader}>
+            <div className={styles.colItem}>ITEM</div>
+            <div className={styles.colCategory}>CATEGORY</div>
+            <div className={styles.colAuthor}>AUTHOR</div>
+            <div className={styles.colAction}>ACTION</div>
+          </div>
+          <div className={styles.tableBody}>
+            {filteredBooks.map(book => {
+              const hasRequested = requests.some(r => r.book._id === book._id && !r.returnDate && r.status !== 'rejected');
+              return (
+                <div key={book._id} className={styles.tableRow}>
+                  <div className={styles.colItemVal}>
+                    {book.coverImage && (
+                      <img src={book.coverImage} alt={book.title} className={styles.coverImage} />
+                    )}
+                    <span className={styles.tableBookTitle}>{book.title}</span>
+                  </div>
+                  <div className={styles.colCategoryVal}>
+                    {book.categories && book.categories.map((cat, idx) => (
+                      <span key={idx} className={styles.categoryBadge}>{cat}</span>
+                    ))}
+                  </div>
+                  <div className={styles.colAuthorVal}>{book.author}</div>
+                  <div className={styles.colActionVal}>
+                    <button 
+                      className={styles.requestButton} 
+                      onClick={() => handleRequestBook(book._id)}
+                      disabled={hasRequested}
+                    >
+                      {hasRequested ? 'Requested' : 'Request'}
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>

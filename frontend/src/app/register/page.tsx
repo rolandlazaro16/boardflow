@@ -29,15 +29,29 @@ export default function RegisterPage() {
       });
       
       if (!response.ok) {
-        const data = await response.json();
-        throw new Error(data.message || 'Registration failed');
+        let errorMessage = 'Registration failed';
+        try {
+          const data = await response.json();
+          errorMessage = data.message || errorMessage;
+        } catch (e) {
+          // Handle cases where the backend returns an HTML error page (e.g. 502 Bad Gateway or 404)
+          errorMessage = `Server error: ${response.status} ${response.statusText}. The backend might be offline.`;
+        }
+        throw new Error(errorMessage);
       }
 
-      const data = await response.json();
+      let data;
+      try {
+        data = await response.json();
+      } catch (e) {
+        const urlFetched = `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api'}/auth/register`;
+        throw new Error(`Expected JSON but received an invalid format. Fetched URL: ${urlFetched}. Status: ${response.status}`);
+      }
+
       localStorage.setItem('token', data.token);
       localStorage.setItem('user', JSON.stringify(data.user));
 
-      if (data.user.role === 'admin') {
+      if (data.user && data.user.role === 'admin') {
         router.push('/admin');
       } else {
         router.push('/user');
