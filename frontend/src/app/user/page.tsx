@@ -158,7 +158,13 @@ export default function UserDashboard() {
                   </div>
                   <div className={styles.colCategoryVal}>
                     {book.categories && book.categories.map((cat, idx) => (
-                      <span key={idx} className={styles.categoryBadge}>{cat}</span>
+                      <span 
+                        key={idx} 
+                        className={styles.categoryBadge}
+                        onClick={() => setSearchQuery(cat)}
+                      >
+                        {cat}
+                      </span>
                     ))}
                   </div>
                   <div className={styles.colAuthorVal}>{book.author}</div>
