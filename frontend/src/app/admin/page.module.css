@@ -85,3 +85,28 @@
   color: #e53e3e;
   font-weight: bold;
 }
+
+.actionButtonsContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.deleteButton {
+  padding: 0.5rem;
+  background-color: #fee2e2;
+  color: #ef4444;
+  border: 1px solid #fecaca;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.deleteButton:hover {
+  background-color: #fca5a5;
+  color: #dc2626;
+}
+

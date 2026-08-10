@@ -114,4 +114,25 @@ router.put('/:id/return', authMiddleware, async (req: Request, res: Response): P
   }
 });
 
+// Admin: Delete a request
+router.delete('/:id', authMiddleware, async (req: Request, res: Response): Promise<void> => {
+  try {
+    if ((req as any).user.role !== 'admin') {
+      res.status(403).json({ message: 'Not authorized' });
+      return;
+    }
+
+    const bookRequest = await BookRequest.findByIdAndDelete(req.params.id);
+
+    if (!bookRequest) {
+      res.status(404).json({ message: 'Request not found' });
+      return;
+    }
+
+    res.json({ message: 'Request deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
 export default router;
