@@ -14,7 +14,15 @@ app.use(express.json());
 
 import path from 'path';
 // Serve static files from the 'public' directory
-app.use('/public', express.static(path.join(__dirname, '../public')));
+const serveStaticOptions = {
+  setHeaders: (res: any, filePath: string) => {
+    if (filePath.endsWith('.pdf')) {
+      res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+    }
+  }
+};
+app.use('/public', express.static(path.join(__dirname, '../public'), serveStaticOptions));
+app.use('/api/public', express.static(path.join(__dirname, '../public'), serveStaticOptions));
 
 import authRoutes from './routes/auth';
 import bookRoutes from './routes/books';
