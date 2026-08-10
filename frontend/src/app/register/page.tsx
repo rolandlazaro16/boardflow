@@ -14,7 +14,6 @@ export default function RegisterPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [role, setRole] = useState('user');
   const [error, setError] = useState('');
   const router = useRouter();
 
@@ -37,7 +36,7 @@ export default function RegisterPage() {
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api'}/auth/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ firstName, middleName, lastName, dateOfBirth, contact, email, password, role }),
+        body: JSON.stringify({ firstName, middleName, lastName, dateOfBirth, contact, email, password, role: 'user' }),
       });
       
       if (!response.ok) {
@@ -137,13 +136,6 @@ export default function RegisterPage() {
                 )}
               </button>
             </div>
-          </div>
-          <div className={styles.formGroup}>
-            <label className={styles.label}>Role</label>
-            <select className={styles.input} value={role} onChange={e => setRole(e.target.value)}>
-              <option value="user">User</option>
-              <option value="admin">Admin</option>
-            </select>
           </div>
           <button className={styles.button} type="submit">Register</button>
           <div style={{ marginTop: '1.5rem', textAlign: 'center' }}>
