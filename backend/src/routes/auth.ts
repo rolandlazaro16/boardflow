@@ -15,6 +15,16 @@ router.post('/register', async (req: Request, res: Response): Promise<void> => {
       return;
     }
 
+    if (!/^\d{10}$/.test(contact)) {
+      res.status(400).json({ message: 'Contact must be exactly 10 digits and contain only numbers.' });
+      return;
+    }
+
+    if (!password || password.length < 8) {
+      res.status(400).json({ message: 'Password must be at least 8 characters long.' });
+      return;
+    }
+
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 

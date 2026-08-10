@@ -21,6 +21,17 @@ export default function RegisterPage() {
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+
+    // Client-side validations
+    if (!/^\d{10}$/.test(contact)) {
+      setError('Contact must be exactly 10 digits and contain only numbers.');
+      return;
+    }
+
+    if (password.length < 8) {
+      setError('Password must be at least 8 characters long.');
+      return;
+    }
     
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api'}/auth/register`, {
@@ -86,7 +97,19 @@ export default function RegisterPage() {
           </div>
           <div className={styles.formGroup}>
             <label className={styles.label}>Contact</label>
-            <input className={styles.input} type="text" value={contact} onChange={e => setContact(e.target.value)} required />
+            <input 
+              className={styles.input} 
+              type="text" 
+              value={contact} 
+              onChange={e => {
+                // Restrict input to only digits and max 10 characters
+                const val = e.target.value.replace(/\D/g, '');
+                if (val.length <= 10) {
+                  setContact(val);
+                }
+              }} 
+              required 
+            />
           </div>
           <div className={styles.formGroup}>
             <label className={styles.label}>Email</label>
