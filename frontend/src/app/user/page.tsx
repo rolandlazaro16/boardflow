@@ -29,6 +29,32 @@ export default function UserDashboard() {
   const [searchQuery, setSearchQuery] = useState('');
   const router = useRouter();
 
+  const getBackendBaseUrl = () => {
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
+    return apiUrl.replace(/\/api$/, '');
+  };
+
+  const handleDownload = async (pdfUrl: string, title: string) => {
+    try {
+      const fileUrl = `${getBackendBaseUrl()}${pdfUrl}`;
+      const response = await fetch(fileUrl);
+      if (!response.ok) throw new Error('Network response was not ok');
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${title}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error('Error downloading the file:', error);
+      // Fallback: try opening it in a new window/tab
+      window.open(`${getBackendBaseUrl()}${pdfUrl}`, '_blank');
+    }
+  };
+
   useEffect(() => {
     const user = localStorage.getItem('user');
     if (!user) {
@@ -113,8 +139,18 @@ export default function UserDashboard() {
               
               {req.status === 'approved' && !req.returnDate && (
                 <div className={styles.actionButtons}>
-                  <a href={`http://localhost:5000${req.book.pdfUrl}`} target="_blank" rel="noreferrer" className={styles.readButton}>Read PDF</a>
-                  <a href={`http://localhost:5000${req.book.pdfUrl}`} download className={styles.downloadButton}>Download</a>
+                  <button 
+                    className={styles.readButton} 
+                    onClick={() => window.open(`${getBackendBaseUrl()}${req.book.pdfUrl}`, '_blank')}
+                  >
+                    Read PDF
+                  </button>
+                  <button 
+                    className={styles.downloadButton} 
+                    onClick={() => handleDownload(req.book.pdfUrl, req.book.title)}
+                  >
+                    Download
+                  </button>
                   <button className={styles.button} onClick={() => handleReturn(req._id)}>Return Book</button>
                 </div>
               )}
