@@ -99,6 +99,10 @@ export default function RegisterPage() {
             <input 
               className={styles.input} 
               type="text" 
+              inputMode="numeric"
+              pattern="\d{10}"
+              minLength={10}
+              maxLength={10}
               value={contact} 
               onChange={e => {
                 // Restrict input to only digits and max 10 characters
