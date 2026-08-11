@@ -29,4 +29,22 @@ router.post('/', authMiddleware, async (req: Request, res: Response): Promise<vo
   }
 });
 
+// Admin only route to delete a book
+router.delete('/:id', authMiddleware, async (req: Request, res: Response): Promise<void> => {
+  try {
+    if ((req as any).user.role !== 'admin') {
+      res.status(403).json({ message: 'Not authorized' });
+      return;
+    }
+    const book = await Book.findByIdAndDelete(req.params.id);
+    if (!book) {
+      res.status(404).json({ message: 'Book not found' });
+      return;
+    }
+    res.json({ message: 'Book deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
 export default router;
