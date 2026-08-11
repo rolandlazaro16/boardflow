@@ -31,6 +31,11 @@ export default function UserDashboard() {
 
   const getBackendBaseUrl = () => {
     const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
+    if (apiUrl === '/api') {
+      return typeof window !== 'undefined' && window.location.hostname === 'localhost' 
+        ? 'http://localhost:5000' 
+        : 'https://boardflow-8e0a.onrender.com';
+    }
     return apiUrl.replace(/\/api\/?$/, '');
   };
 
