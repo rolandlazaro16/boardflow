@@ -8,7 +8,7 @@ const pdfParse = require('pdf-parse');
 
 const router = express.Router();
 
-const uploadDir = path.join(__dirname, '../../public/uploads');
+const uploadDir = path.join(process.cwd(), 'public/uploads');
 if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir, { recursive: true });
 }

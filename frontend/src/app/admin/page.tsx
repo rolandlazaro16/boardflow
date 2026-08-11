@@ -125,7 +125,12 @@ export default function AdminDashboard() {
       });
 
       if (!response.ok) {
-        throw new Error('Upload failed');
+        let errMsg = 'Upload failed';
+        try {
+          const errData = await response.json();
+          errMsg = errData.message || errMsg;
+        } catch (_) {}
+        throw new Error(errMsg);
       }
 
       const data = await response.json();
