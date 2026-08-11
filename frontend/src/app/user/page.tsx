@@ -136,13 +136,13 @@ export default function UserDashboard() {
         <div className={styles.requestsGrid}>
           {requests.map(req => (
             <div key={req._id} className={styles.requestCard}>
-              <h3 className={styles.bookTitle}>{req.book.title}</h3>
-              <p className={styles.bookAuthor}>by {req.book.author}</p>
+              <h3 className={styles.bookTitle}>{req.book?.title || 'Deleted Book'}</h3>
+              <p className={styles.bookAuthor}>by {req.book?.author || 'Unknown Author'}</p>
               <p>Status: <span className={req.status === 'approved' ? styles.statusApproved : req.status === 'rejected' ? styles.statusRejected : styles.statusPending}>{req.status.toUpperCase()}</span></p>
               {req.borrowDate && <p>Borrowed: {new Date(req.borrowDate).toLocaleString()}</p>}
               {req.returnDate && <p>Returned: {new Date(req.returnDate).toLocaleString()}</p>}
               
-              {req.status === 'approved' && !req.returnDate && (
+              {req.status === 'approved' && !req.returnDate && req.book && (
                 <div className={styles.actionButtons}>
                   <button 
                     className={styles.readButton} 
@@ -157,6 +157,11 @@ export default function UserDashboard() {
                     Download
                   </button>
                   <button className={styles.button} onClick={() => handleReturn(req._id)}>Return Book</button>
+                </div>
+              )}
+              {req.status === 'approved' && !req.returnDate && !req.book && (
+                <div className={styles.actionButtons}>
+                  <button className={styles.button} onClick={() => handleReturn(req._id)}>Archive Request</button>
                 </div>
               )}
             </div>
@@ -188,7 +193,7 @@ export default function UserDashboard() {
           </div>
           <div className={styles.tableBody}>
             {filteredBooks.map(book => {
-              const hasRequested = requests.some(r => r.book._id === book._id && !r.returnDate && r.status !== 'rejected');
+              const hasRequested = requests.some(r => r.book?._id === book._id && !r.returnDate && r.status !== 'rejected');
               return (
                 <div key={book._id} className={styles.tableRow}>
                   <div className={styles.colItemVal}>

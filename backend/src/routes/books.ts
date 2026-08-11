@@ -50,8 +50,8 @@ router.post('/', authMiddleware, async (req: Request, res: Response): Promise<vo
       res.status(403).json({ message: 'Not authorized' });
       return;
     }
-    const { title, author, description, pdfUrl } = req.body;
-    const book = new Book({ title, author, description, pdfUrl });
+    const { title, author, description, pdfUrl, coverImage, categories } = req.body;
+    const book = new Book({ title, author, description, pdfUrl, coverImage, categories });
     await book.save();
     res.status(201).json(book);
   } catch (error) {
