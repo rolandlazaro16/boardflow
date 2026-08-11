@@ -112,7 +112,7 @@ export default function RegisterPage() {
           <div className={styles.formGroup}>
             <label className={styles.label}>Contact</label>
             <input 
-              className={styles.input} 
+              className={`${styles.input} ${contactErrorText ? styles.inputError : ''}`} 
               type="text" 
               inputMode="numeric"
               value={contact} 
@@ -163,7 +163,7 @@ export default function RegisterPage() {
               </button>
             </div>
           </div>
-          <button className={styles.button} type="submit">Register</button>
+          <button className={styles.button} type="submit" disabled={!isContactValid}>Register</button>
           <div style={{ marginTop: '1.5rem', textAlign: 'center' }}>
             <p style={{ color: '#555' }}>
               Already have an account? <Link href="/login" style={{ color: '#0070f3', textDecoration: 'none', fontWeight: 'bold' }}>Login Here</Link>
