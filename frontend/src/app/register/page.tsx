@@ -11,11 +11,26 @@ export default function RegisterPage() {
   const [lastName, setLastName] = useState('');
   const [dateOfBirth, setDateOfBirth] = useState('');
   const [contact, setContact] = useState('');
+  const [contactTouched, setContactTouched] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const router = useRouter();
+
+  const isContactValid = /^\d{10}$/.test(contact);
+  let contactErrorText = '';
+  if (contact.length > 0 || contactTouched) {
+    if (contact.length === 0) {
+      contactErrorText = 'Contact is required.';
+    } else if (!/^\d+$/.test(contact)) {
+      contactErrorText = 'Contact must contain only numbers.';
+    } else if (contact.length < 10) {
+      contactErrorText = 'Contact must be exactly 10 digits.';
+    } else if (contact.length > 10) {
+      contactErrorText = 'Contact must be exactly 10 digits.';
+    }
+  }
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -100,23 +115,29 @@ export default function RegisterPage() {
               className={styles.input} 
               type="text" 
               inputMode="numeric"
-              pattern="\d{10}"
-              minLength={10}
-              maxLength={10}
               value={contact} 
               onChange={e => {
-                // Restrict input to only digits and max 10 characters
-                const val = e.target.value.replace(/\D/g, '');
-                if (val.length <= 10) {
-                  setContact(val);
-                }
+                setContact(e.target.value);
               }} 
+              onBlur={() => setContactTouched(true)}
               required 
             />
+            {contactErrorText && (
+              <span style={{ color: 'red', fontSize: '0.85rem', marginTop: '0.25rem', display: 'block' }}>
+                {contactErrorText}
+              </span>
+            )}
           </div>
           <div className={styles.formGroup}>
             <label className={styles.label}>Email</label>
-            <input className={styles.input} type="email" value={email} onChange={e => setEmail(e.target.value)} required />
+            <input 
+              className={styles.input} 
+              type="email" 
+              value={email} 
+              onChange={e => setEmail(e.target.value)} 
+              required 
+              disabled={!isContactValid}
+            />
           </div>
           <div className={styles.formGroup}>
             <label className={styles.label}>Password</label>
@@ -127,6 +148,7 @@ export default function RegisterPage() {
                 value={password} 
                 onChange={e => setPassword(e.target.value)} 
                 required 
+                disabled={!isContactValid}
               />
               <button 
                 type="button" 
