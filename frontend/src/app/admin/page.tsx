@@ -106,6 +106,53 @@ export default function AdminDashboard() {
     }
   };
 
+  const loadPdfJs = (): Promise<any> => {
+    return new Promise((resolve, reject) => {
+      if ((window as any).pdfjsLib) {
+        resolve((window as any).pdfjsLib);
+        return;
+      }
+      const script = document.createElement('script');
+      script.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js';
+      script.onload = () => {
+        const pdfjsLib = (window as any).pdfjsLib;
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+        resolve(pdfjsLib);
+      };
+      script.onerror = () => reject(new Error('Failed to load PDF.js'));
+      document.body.appendChild(script);
+    });
+  };
+
+  const renderPdfCover = async (file: File): Promise<string> => {
+    try {
+      const pdfjsLib = await loadPdfJs();
+      const arrayBuffer = await file.arrayBuffer();
+      const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+      const page = await pdf.getPage(1);
+      
+      const viewport = page.getViewport({ scale: 1.0 });
+      const canvas = document.createElement('canvas');
+      const context = canvas.getContext('2d');
+      if (!context) throw new Error('Failed to get 2D context');
+
+      const scale = 400 / viewport.width;
+      const scaledViewport = page.getViewport({ scale });
+      canvas.width = scaledViewport.width;
+      canvas.height = scaledViewport.height;
+
+      await page.render({
+        canvasContext: context,
+        viewport: scaledViewport
+      }).promise;
+
+      return canvas.toDataURL('image/png');
+    } catch (err) {
+      console.error('Error rendering PDF cover:', err);
+      return 'https://images.unsplash.com/photo-1543002588-bfa74002ed7e?q=80&w=400';
+    }
+  };
+
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -115,6 +162,8 @@ export default function AdminDashboard() {
 
     setUploading(true);
     try {
+      const generatedCover = await renderPdfCover(file);
+
       const token = localStorage.getItem('token');
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api'}/books/upload`, {
         method: 'POST',
@@ -138,7 +187,7 @@ export default function AdminDashboard() {
       setAuthor(data.author || '');
       setDescription(data.description || '');
       setPdfUrl(data.pdfUrl || '');
-      setCoverImage(data.coverImage || '');
+      setCoverImage(generatedCover || data.coverImage || '');
       setCategories(data.categories || '');
     } catch (error: any) {
       alert('Error uploading PDF: ' + error.message);
