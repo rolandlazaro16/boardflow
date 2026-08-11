@@ -165,8 +165,23 @@ router.post('/upload', authMiddleware, (req: Request, res: Response, next) => {
       categoriesList.push('General');
     }
 
-    // Default high-quality placeholder cover image
-    const coverImage = 'https://images.unsplash.com/photo-1543002588-bfa74002ed7e?q=80&w=400';
+    // Generate cover image from the first page of the PDF, or fallback to default
+    let coverImage = 'https://images.unsplash.com/photo-1543002588-bfa74002ed7e?q=80&w=400';
+    try {
+      const pdfImgConvert = require('pdf-img-convert');
+      const outputImages = await pdfImgConvert.convert(filePath, {
+        page_numbers: [1],
+        width: 400
+      });
+      if (outputImages && outputImages.length > 0) {
+        const coverFilename = `cover-${path.basename(req.file.filename, path.extname(req.file.filename))}.png`;
+        const coverImagePath = path.join(uploadDir, coverFilename);
+        fs.writeFileSync(coverImagePath, outputImages[0]);
+        coverImage = `/public/uploads/${coverFilename}`;
+      }
+    } catch (imgError) {
+      console.error('Failed to render PDF cover page:', imgError);
+    }
 
     res.json({
       pdfUrl: fileUrl,
