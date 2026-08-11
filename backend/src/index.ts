@@ -21,8 +21,8 @@ const serveStaticOptions = {
     }
   }
 };
-app.use('/public', express.static(path.join(__dirname, '../public'), serveStaticOptions));
-app.use('/api/public', express.static(path.join(__dirname, '../public'), serveStaticOptions));
+app.use('/public', express.static(path.join(process.cwd(), 'public'), serveStaticOptions));
+app.use('/api/public', express.static(path.join(process.cwd(), 'public'), serveStaticOptions));
 
 import authRoutes from './routes/auth';
 import bookRoutes from './routes/books';

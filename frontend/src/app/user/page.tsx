@@ -31,7 +31,7 @@ export default function UserDashboard() {
 
   const getBackendBaseUrl = () => {
     const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
-    return apiUrl.replace(/\/api$/, '');
+    return apiUrl.replace(/\/api\/?$/, '');
   };
 
   const handleDownload = async (pdfUrl: string, title: string) => {
