@@ -78,7 +78,14 @@ router.delete('/:id', authMiddleware, async (req: Request, res: Response): Promi
 });
 
 // Admin only route to upload a PDF book and extract details
-router.post('/upload', authMiddleware, upload.single('file'), async (req: Request, res: Response): Promise<void> => {
+router.post('/upload', authMiddleware, (req: Request, res: Response, next) => {
+  upload.single('file')(req, res, (err: any) => {
+    if (err) {
+      return res.status(400).json({ message: err.message || 'Error uploading file' });
+    }
+    next();
+  });
+}, async (req: Request, res: Response): Promise<void> => {
   try {
     if ((req as any).user.role !== 'admin') {
       res.status(403).json({ message: 'Not authorized' });
