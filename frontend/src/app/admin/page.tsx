@@ -43,6 +43,7 @@ export default function AdminDashboard() {
   const [pdfUrl, setPdfUrl] = useState('');
   const [coverImage, setCoverImage] = useState('');
   const [categories, setCategories] = useState('');
+  const [uploading, setUploading] = useState(false);
 
   const router = useRouter();
 
@@ -102,6 +103,40 @@ export default function AdminDashboard() {
       loadRequests();
     } catch (error: any) {
       alert(error.message);
+    }
+  };
+
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append('file', file);
+
+    setUploading(true);
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api'}/books/upload`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        },
+        body: formData
+      });
+
+      if (!response.ok) {
+        throw new Error('Upload failed');
+      }
+
+      const data = await response.json();
+      setTitle(data.title || '');
+      setAuthor(data.author || '');
+      setDescription(data.description || '');
+      setPdfUrl(data.pdfUrl || '');
+    } catch (error: any) {
+      alert('Error uploading PDF: ' + error.message);
+    } finally {
+      setUploading(false);
     }
   };
 
@@ -240,6 +275,16 @@ export default function AdminDashboard() {
           <div className={styles.card}>
             <h3 style={{ marginBottom: '1rem' }}>Add New Book</h3>
             <form onSubmit={handleAddBook}>
+              <div className={styles.formGroup} style={{ borderBottom: '1px solid #eaeaea', paddingBottom: '1rem', marginBottom: '1.5rem' }}>
+                <label className={styles.label} style={{ fontWeight: 'bold' }}>Upload PDF File (Auto-fills form fields)</label>
+                <input 
+                  type="file" 
+                  accept="application/pdf" 
+                  onChange={handleFileUpload} 
+                  style={{ display: 'block', marginTop: '0.5rem' }} 
+                />
+                {uploading && <p style={{ fontSize: '0.85rem', color: '#666', marginTop: '0.25rem' }}>Uploading and analyzing PDF...</p>}
+              </div>
               <div className={styles.formGroup}>
                 <label className={styles.label}>Title</label>
                 <input className={styles.input} type="text" value={title} onChange={e => setTitle(e.target.value)} required />
