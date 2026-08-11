@@ -20,8 +20,8 @@ router.post('/register', async (req: Request, res: Response): Promise<void> => {
       return;
     }
 
-    if (!password || password.length < 8) {
-      res.status(400).json({ message: 'Password must be at least 8 characters long.' });
+    if (!password || !/^(?=.*[A-Za-z])(?=.*\d).{8,}$/.test(password)) {
+      res.status(400).json({ message: 'Password must be at least 8 characters long and contain both letters and numbers.' });
       return;
     }
 

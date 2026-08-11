@@ -14,6 +14,7 @@ export default function RegisterPage() {
   const [contactTouched, setContactTouched] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [passwordTouched, setPasswordTouched] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const router = useRouter();
@@ -32,6 +33,18 @@ export default function RegisterPage() {
     }
   }
 
+  const isPasswordValid = /^(?=.*[A-Za-z])(?=.*\d).{8,}$/.test(password);
+  let passwordErrorText = '';
+  if (password.length > 0 || passwordTouched) {
+    if (password.length === 0) {
+      passwordErrorText = 'Password is required.';
+    } else if (password.length < 8) {
+      passwordErrorText = 'Password must be at least 8 characters long.';
+    } else if (!/[A-Za-z]/.test(password) || !/\d/.test(password)) {
+      passwordErrorText = 'Password must contain both letters and numbers.';
+    }
+  }
+
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
@@ -42,8 +55,8 @@ export default function RegisterPage() {
       return;
     }
 
-    if (password.length < 8) {
-      setError('Password must be at least 8 characters long.');
+    if (!/^(?=.*[A-Za-z])(?=.*\d).{8,}$/.test(password)) {
+      setError('Password must be at least 8 characters long and contain both letters and numbers.');
       return;
     }
     
@@ -143,10 +156,11 @@ export default function RegisterPage() {
             <label className={styles.label}>Password</label>
             <div className={styles.passwordWrapper}>
               <input 
-                className={styles.input} 
+                className={`${styles.input} ${passwordErrorText ? styles.inputError : ''}`} 
                 type={showPassword ? 'text' : 'password'} 
                 value={password} 
                 onChange={e => setPassword(e.target.value)} 
+                onBlur={() => setPasswordTouched(true)}
                 required 
                 disabled={!isContactValid}
               />
@@ -162,8 +176,13 @@ export default function RegisterPage() {
                 )}
               </button>
             </div>
+            {passwordErrorText && (
+              <span style={{ color: 'red', fontSize: '0.85rem', marginTop: '0.25rem', display: 'block' }}>
+                {passwordErrorText}
+              </span>
+            )}
           </div>
-          <button className={styles.button} type="submit" disabled={!isContactValid}>Register</button>
+          <button className={styles.button} type="submit" disabled={!isContactValid || !isPasswordValid}>Register</button>
           <div style={{ marginTop: '1.5rem', textAlign: 'center' }}>
             <p style={{ color: '#555' }}>
               Already have an account? <Link href="/login" style={{ color: '#0070f3', textDecoration: 'none', fontWeight: 'bold' }}>Login Here</Link>
