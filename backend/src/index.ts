@@ -17,7 +17,7 @@ import path from 'path';
 const serveStaticOptions = {
   setHeaders: (res: any, filePath: string) => {
     if (filePath.endsWith('.pdf')) {
-      res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+      res.setHeader('Content-Type', 'application/pdf');
     }
   }
 };
