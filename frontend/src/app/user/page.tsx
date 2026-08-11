@@ -134,7 +134,7 @@ export default function UserDashboard() {
       <div className={styles.section}>
         <h2 className={styles.sectionTitle}>My Requests</h2>
         <div className={styles.requestsGrid}>
-          {requests.map(req => (
+          {requests.filter(req => req.book).map(req => (
             <div key={req._id} className={styles.requestCard}>
               <h3 className={styles.bookTitle}>{req.book?.title || 'Deleted Book'}</h3>
               <p className={styles.bookAuthor}>by {req.book?.author || 'Unknown Author'}</p>

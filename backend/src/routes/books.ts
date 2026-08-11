@@ -1,5 +1,6 @@
 import express, { Request, Response } from 'express';
 import { Book } from '../models/Book';
+import { BookRequest } from '../models/BookRequest';
 import { authMiddleware } from '../middleware/auth';
 import multer from 'multer';
 import path from 'path';
@@ -71,6 +72,8 @@ router.delete('/:id', authMiddleware, async (req: Request, res: Response): Promi
       res.status(404).json({ message: 'Book not found' });
       return;
     }
+    // Also delete any BookRequest referencing this book!
+    await BookRequest.deleteMany({ book: req.params.id });
     res.json({ message: 'Book deleted successfully' });
   } catch (error) {
     res.status(500).json({ message: 'Server error' });
