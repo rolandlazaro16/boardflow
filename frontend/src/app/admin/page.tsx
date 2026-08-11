@@ -138,6 +138,8 @@ export default function AdminDashboard() {
       setAuthor(data.author || '');
       setDescription(data.description || '');
       setPdfUrl(data.pdfUrl || '');
+      setCoverImage(data.coverImage || '');
+      setCategories(data.categories || '');
     } catch (error: any) {
       alert('Error uploading PDF: ' + error.message);
     } finally {

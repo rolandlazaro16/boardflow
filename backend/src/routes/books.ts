@@ -105,6 +105,7 @@ router.post('/upload', authMiddleware, (req: Request, res: Response, next) => {
     let title = '';
     let author = '';
     let description = '';
+    let categoriesList: string[] = [];
 
     try {
       const pdfData = await pdfParse(dataBuffer);
@@ -130,15 +131,50 @@ router.post('/upload', authMiddleware, (req: Request, res: Response, next) => {
           description = lines.slice(2, 6).join(' ');
         }
       }
+
+      // Generate description from text if still empty
+      if (!description && text) {
+        const cleanText = text.replace(/\s+/g, ' ').trim();
+        if (cleanText.length > 250) {
+          description = cleanText.substring(0, 247) + '...';
+        } else {
+          description = cleanText;
+        }
+      }
+
+      // Recommend categories based on keywords
+      const lowerText = text.toLowerCase();
+      const categoryKeywords: { [key: string]: string[] } = {
+        'Fantasy': ['magic', 'wizard', 'witch', 'elf', 'dragon', 'fantasy', 'castle'],
+        'Romance': ['love', 'romance', 'marriage', 'husband', 'wife', 'darling', 'lover'],
+        'Adventure': ['adventure', 'sea', 'ship', 'island', 'voyage', 'captain', 'journey'],
+        'Psychological': ['mind', 'heart', 'feeling', 'soul', 'psychological', 'thought'],
+        'Classics': ['classic', 'novel', 'history', 'society']
+      };
+
+      for (const [category, keywords] of Object.entries(categoryKeywords)) {
+        if (keywords.some(keyword => lowerText.includes(keyword))) {
+          categoriesList.push(category);
+        }
+      }
     } catch (parseError) {
       console.error('Failed to parse PDF metadata:', parseError);
     }
+
+    if (categoriesList.length === 0) {
+      categoriesList.push('General');
+    }
+
+    // Default high-quality placeholder cover image
+    const coverImage = 'https://images.unsplash.com/photo-1543002588-bfa74002ed7e?q=80&w=400';
 
     res.json({
       pdfUrl: fileUrl,
       title: title || path.basename(req.file.originalname, '.pdf'),
       author: author || 'Unknown Author',
-      description: description || ''
+      description: description || 'No description available.',
+      coverImage,
+      categories: categoriesList.join(', ')
     });
   } catch (error: any) {
     res.status(500).json({ message: error.message || 'Server error during upload' });
