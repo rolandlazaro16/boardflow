@@ -170,3 +170,14 @@
   margin-top: 0.4rem;
   display: block;
 }
+
+@media (max-width: 480px) {
+  .formCard {
+    padding: 2rem 1.5rem;
+    border-radius: 18px;
+  }
+  .title {
+    font-size: 1.6rem;
+    margin-bottom: 1.75rem;
+  }
+}
