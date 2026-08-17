@@ -181,6 +181,7 @@ router.post('/upload', authMiddleware, (req: Request, res: Response, next) => {
     });
   } catch (error: any) {
     res.status(500).json({ message: error.message || 'Server error during upload' });
+  }
 });
 
 // Admin only route to update a book
