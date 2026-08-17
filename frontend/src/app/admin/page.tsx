@@ -269,18 +269,18 @@ export default function AdminDashboard() {
           <tbody>
             {requests.map(req => (
               <tr key={req._id}>
-                <td>{req.user?.firstName} {req.user?.lastName} ({req.user?.email})</td>
-                <td>{req.book?.title}</td>
-                <td className={
+                <td data-label="User">{req.user?.firstName} {req.user?.lastName} ({req.user?.email})</td>
+                <td data-label="Book">{req.book?.title}</td>
+                <td data-label="Status" className={
                   req.status === 'approved' ? styles.statusApproved : 
                   req.status === 'rejected' ? styles.statusRejected : styles.statusPending
                 }>
                   {req.status.toUpperCase()}
                 </td>
-                <td>{new Date(req.createdAt).toLocaleString()}</td>
-                <td>{req.borrowDate ? new Date(req.borrowDate).toLocaleString() : '-'}</td>
-                <td>{req.returnDate ? new Date(req.returnDate).toLocaleString() : '-'}</td>
-                <td>
+                <td data-label="Requested On">{new Date(req.createdAt).toLocaleString()}</td>
+                <td data-label="Borrowed On">{req.borrowDate ? new Date(req.borrowDate).toLocaleString() : '-'}</td>
+                <td data-label="Returned On">{req.returnDate ? new Date(req.returnDate).toLocaleString() : '-'}</td>
+                <td data-label="Actions">
                   <div className={styles.actionButtonsContainer}>
                     {req.status === 'pending' && (
                       <>
@@ -318,10 +318,10 @@ export default function AdminDashboard() {
               <tbody>
                 {books.map(book => (
                   <tr key={book._id}>
-                    <td><span style={{ fontSize: '0.8rem', color: '#94a3b8', fontWeight: 600 }}>{book.bookNumber || 'N/A'}</span></td>
-                    <td>{book.title}</td>
-                    <td>{book.author}</td>
-                    <td>
+                    <td data-label="Number"><span style={{ fontSize: '0.8rem', color: '#94a3b8', fontWeight: 600 }}>{book.bookNumber || 'N/A'}</span></td>
+                    <td data-label="Title">{book.title}</td>
+                    <td data-label="Author">{book.author}</td>
+                    <td data-label="Actions">
                       <button className={styles.deleteButton} onClick={() => handleDeleteBook(book._id)} title="Delete Book">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
                       </button>

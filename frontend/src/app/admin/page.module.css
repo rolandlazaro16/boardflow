@@ -258,11 +258,40 @@
 }
 
 @media (max-width: 768px) {
-  .table {
+  .table, .table thead, .table tbody, .table tr, .table td {
     display: block;
     width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+  }
+  .table thead {
+    display: none;
+  }
+  .table tr {
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.25rem;
+    background: #ffffff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+  }
+  .table td {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+    padding: 0.75rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: right;
+  }
+  .table td:last-child {
+    border-bottom: none;
+  }
+  .table td::before {
+    content: attr(data-label);
+    font-weight: 700;
+    color: #6b7280;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    text-align: left;
+    margin-right: 1rem;
   }
 }
 
