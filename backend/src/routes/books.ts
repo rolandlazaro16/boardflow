@@ -181,6 +181,28 @@ router.post('/upload', authMiddleware, (req: Request, res: Response, next) => {
     });
   } catch (error: any) {
     res.status(500).json({ message: error.message || 'Server error during upload' });
+});
+
+// Admin only route to update a book
+router.put('/:id', authMiddleware, async (req: Request, res: Response): Promise<void> => {
+  try {
+    if ((req as any).user.role !== 'admin') {
+      res.status(403).json({ message: 'Not authorized' });
+      return;
+    }
+    const { title, author, description, pdfUrl, coverImage, categories, bookNumber } = req.body;
+    const updatedBook = await Book.findByIdAndUpdate(
+      req.params.id,
+      { title, author, description, pdfUrl, coverImage, categories, bookNumber },
+      { new: true, runValidators: true }
+    );
+    if (!updatedBook) {
+      res.status(404).json({ message: 'Book not found' });
+      return;
+    }
+    res.json(updatedBook);
+  } catch (error: any) {
+    res.status(500).json({ message: error.message || 'Server error' });
   }
 });
 
