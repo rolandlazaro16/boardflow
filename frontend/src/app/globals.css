@@ -1,16 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
 
 :root {
-  --background-raw: 240 25% 4%;
+  --background-raw: 0 0% 0%;
   --background: hsl(var(--background-raw));
-  --foreground: hsl(220 15% 95%);
-  --primary: hsl(250 85% 65%);
-  --primary-hover: hsl(250 90% 70%);
-  --secondary: hsl(280 80% 60%);
-  --border: rgba(255, 255, 255, 0.08);
-  --border-focus: rgba(255, 255, 255, 0.2);
-  --card-bg: rgba(20, 20, 28, 0.6);
-  --card-glow: rgba(99, 102, 241, 0.15);
+  --foreground: hsl(0 0% 100%);
+  --primary: hsl(0 0% 100%);
+  --primary-hover: hsl(0 0% 90%);
+  --secondary: hsl(0 0% 40%);
+  --border: rgba(255, 255, 255, 0.12);
+  --border-focus: rgba(255, 255, 255, 0.35);
+  --card-bg: rgba(12, 12, 12, 0.85);
+  --card-glow: rgba(255, 255, 255, 0.03);
   
   --font-sans: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-display: 'Outfit', sans-serif;
@@ -26,9 +26,9 @@ body {
   overflow-x: hidden;
   background-color: var(--background);
   background-image: 
-    radial-gradient(at 0% 0%, hsla(253, 16%, 7%, 1) 0px, transparent 50%),
-    radial-gradient(at 100% 0%, hsla(270, 70%, 15%, 0.15) 0px, transparent 50%),
-    radial-gradient(at 50% 100%, hsla(240, 80%, 20%, 0.05) 0px, transparent 50%);
+    radial-gradient(at 0% 0%, hsla(0, 0%, 5%, 1) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, hsla(0, 0%, 8%, 0.15) 0px, transparent 50%),
+    radial-gradient(at 50% 100%, hsla(0, 0%, 3%, 0.05) 0px, transparent 50%);
   background-attachment: fixed;
   color: var(--foreground);
   font-family: var(--font-sans);
@@ -61,16 +61,16 @@ a {
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(255, 255, 255, 0.01);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.15);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.3);
 }
 
 /* Base Animations */
