@@ -18,16 +18,16 @@
   font-family: var(--font-display);
   font-size: 2.2rem;
   font-weight: 800;
-  background: linear-gradient(135deg, #ffffff 0%, #a1a1aa 100%);
+  background: linear-gradient(135deg, #1E3A8A 0%, #14532D 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .logoutButton {
   padding: 0.7rem 1.4rem;
-  background-color: rgba(239, 68, 68, 0.1);
+  background-color: rgba(239, 68, 68, 0.05);
   color: #ef4444;
-  border: 1px solid rgba(239, 68, 68, 0.2);
+  border: 1px solid rgba(239, 68, 68, 0.15);
   border-radius: 12px;
   font-size: 0.9rem;
   font-weight: 600;
@@ -38,7 +38,7 @@
 .logoutButton:hover {
   background-color: #ef4444;
   color: #ffffff;
-  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.15);
   transform: translateY(-2px);
 }
 
@@ -51,7 +51,7 @@
   font-size: 1.5rem;
   font-weight: 700;
   margin-bottom: 2rem;
-  color: #ffffff;
+  color: #1A1A1A;
   position: relative;
   display: inline-block;
 }
@@ -74,57 +74,55 @@
 }
 
 .requestCard {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid var(--border);
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
   border-radius: 18px;
   padding: 1.75rem;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.03);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .requestCard:hover {
   transform: translateY(-4px);
-  border-color: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 15px 30px rgba(255, 255, 255, 0.05);
+  border-color: rgba(30, 58, 138, 0.15);
+  box-shadow: 0 15px 30px rgba(30, 58, 138, 0.06);
 }
 
 .bookTitle {
   font-size: 1.3rem;
   font-weight: 700;
   margin-bottom: 0.4rem;
-  color: #ffffff;
+  color: #1A1A1A;
 }
 
 .bookAuthor {
-  color: #94a3b8;
+  color: #4b5563;
   font-size: 0.9rem;
   margin-bottom: 1.25rem;
 }
 
 .statusPending {
-  color: #fbbf24;
+  color: #d97706;
   font-weight: 600;
-  background: rgba(251, 191, 36, 0.1);
+  background: rgba(217, 119, 6, 0.08);
   padding: 0.2rem 0.6rem;
   border-radius: 6px;
   font-size: 0.8rem;
 }
 
 .statusApproved {
-  color: #34d399;
+  color: #059669;
   font-weight: 600;
-  background: rgba(52, 211, 153, 0.1);
+  background: rgba(5, 150, 105, 0.08);
   padding: 0.2rem 0.6rem;
   border-radius: 6px;
   font-size: 0.8rem;
 }
 
 .statusRejected {
-  color: #f87171;
+  color: #dc2626;
   font-weight: 600;
-  background: rgba(248, 113, 113, 0.1);
+  background: rgba(220, 38, 38, 0.08);
   padding: 0.2rem 0.6rem;
   border-radius: 6px;
   font-size: 0.8rem;
@@ -173,9 +171,9 @@
 
 .button {
   padding: 0.55rem 1.1rem;
-  background-color: rgba(255, 255, 255, 0.05);
-  color: #ffffff;
-  border: 1px solid var(--border);
+  background-color: #f3f4f6;
+  color: #1A1A1A;
+  border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 10px;
   font-size: 0.85rem;
   font-weight: 600;
@@ -184,7 +182,7 @@
 }
 
 .button:hover:not(:disabled) {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: #e5e7eb;
   transform: translateY(-1px);
 }
 
@@ -199,20 +197,20 @@
 .searchBar {
   flex-grow: 1;
   padding: 0.75rem 1.25rem;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 14px 0 0 14px;
   outline: none;
   font-size: 0.95rem;
   height: 48px;
-  color: #ffffff;
+  color: #1A1A1A;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .searchBar:focus {
-  background: rgba(255, 255, 255, 0.07);
+  background: #ffffff;
   border-color: var(--primary);
-  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 0 4px rgba(30, 58, 138, 0.08);
 }
 
 .searchButton {
@@ -234,25 +232,23 @@
 }
 
 .tableContainer {
-  border: 1px solid var(--border);
+  border: 1px solid rgba(0, 0, 0, 0.06);
   border-radius: 20px;
   overflow: hidden;
-  background: rgba(20, 20, 30, 0.4);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  background: #ffffff;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.03);
 }
 
 .tableHeader {
   display: grid;
   grid-template-columns: 3.5fr 3.5fr 2fr 1.5fr;
   padding: 1.25rem 1.75rem;
-  background-color: rgba(255, 255, 255, 0.02);
+  background-color: #faf9f6;
   font-size: 0.75rem;
-  color: #64748b;
+  color: #6b7280;
   font-weight: bold;
   letter-spacing: 0.1em;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 .tableRow {
@@ -260,12 +256,12 @@
   grid-template-columns: 3.5fr 3.5fr 2fr 1.5fr;
   padding: 1.5rem 1.75rem;
   align-items: center;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
   transition: background-color 0.2s;
 }
 
 .tableRow:hover {
-  background-color: rgba(255, 255, 255, 0.01);
+  background-color: #faf9f6;
 }
 
 .tableRow:last-child {
@@ -283,8 +279,8 @@
   height: 76px;
   object-fit: cover;
   border-radius: 8px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.08);
   transition: transform 0.3s;
 }
 
@@ -295,7 +291,7 @@
 .tableBookTitle {
   font-size: 1.05rem;
   font-weight: 600;
-  color: #ffffff;
+  color: #1A1A1A;
 }
 
 .colCategoryVal {
@@ -305,9 +301,9 @@
 }
 
 .categoryBadge {
-  background-color: rgba(255, 255, 255, 0.05);
-  color: #e2e8f0;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background-color: rgba(30, 58, 138, 0.05);
+  color: var(--primary);
+  border: 1px solid rgba(30, 58, 138, 0.1);
   padding: 0.3rem 0.65rem;
   border-radius: 8px;
   font-size: 0.75rem;
@@ -317,14 +313,14 @@
 }
 
 .categoryBadge:hover {
-  background-color: #ffffff;
-  color: #000000;
-  border-color: #ffffff;
+  background-color: var(--primary);
+  color: white;
+  border-color: var(--primary);
   transform: translateY(-1px);
 }
 
 .colAuthorVal {
-  color: #94a3b8;
+  color: #4b5563;
   font-size: 0.95rem;
 }
 
@@ -336,25 +332,25 @@
 .requestButton {
   padding: 0.55rem 1.1rem;
   background-color: var(--primary);
-  color: #000000;
+  color: white;
   border: none;
   border-radius: 10px;
   font-size: 0.85rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 10px rgba(30, 58, 138, 0.2);
 }
 
 .requestButton:hover:not(:disabled) {
   background-color: var(--primary-hover);
   transform: translateY(-1px);
-  box-shadow: 0 6px 15px rgba(255, 255, 255, 0.15);
+  box-shadow: 0 6px 15px rgba(30, 58, 138, 0.3);
 }
 
 .requestButton:disabled {
-  background-color: rgba(255, 255, 255, 0.05);
-  color: #64748b;
+  background-color: #e5e7eb;
+  color: #9ca3af;
   box-shadow: none;
   cursor: not-allowed;
 }

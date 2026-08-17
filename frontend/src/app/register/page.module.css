@@ -9,15 +9,13 @@
 }
 
 .formCard {
-  background: rgba(20, 20, 30, 0.45);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
   padding: 3rem 2.5rem;
   border-radius: 24px;
   box-shadow: 
-    0 20px 40px rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    0 15px 35px rgba(0, 0, 0, 0.05),
+    0 5px 15px rgba(0, 0, 0, 0.03);
   width: 100%;
   max-width: 500px;
   animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -29,7 +27,7 @@
   font-family: var(--font-display);
   font-size: 2rem;
   font-weight: 800;
-  background: linear-gradient(135deg, #ffffff 0%, #a1a1aa 100%);
+  background: linear-gradient(135deg, #1E3A8A 0%, #14532D 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -41,74 +39,74 @@
 .label {
   display: block;
   margin-bottom: 0.5rem;
-  color: #94a3b8;
+  color: #4b5563;
   font-size: 0.85rem;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.02em;
 }
 
 .input {
   width: 100%;
   padding: 0.8rem 1rem;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #fdfdfd;
+  border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 12px;
   font-size: 0.95rem;
-  color: #ffffff;
+  color: #1A1A1A;
   outline: none;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .input:focus:not(:disabled) {
-  background: rgba(255, 255, 255, 0.07);
+  background: #ffffff;
   border-color: var(--primary);
-  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 0 4px rgba(30, 58, 138, 0.08);
 }
 
 .input:disabled {
-  background: rgba(255, 255, 255, 0.01);
-  border-color: rgba(255, 255, 255, 0.03);
-  color: rgba(255, 255, 255, 0.25);
+  background: #f3f4f6;
+  border-color: rgba(0, 0, 0, 0.05);
+  color: #9ca3af;
   cursor: not-allowed;
 }
 
 .inputError {
   border-color: #ef4444 !important;
-  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.15) !important;
+  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.08) !important;
 }
 
 .button {
   width: 100%;
   padding: 0.9rem;
-  background: #ffffff;
-  color: #000000;
+  background: var(--primary);
+  color: #ffffff;
   border: none;
   border-radius: 12px;
   font-size: 1rem;
   font-weight: 700;
   cursor: pointer;
-  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 12px rgba(30, 58, 138, 0.2);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   margin-top: 1.5rem;
 }
 
 .button:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.25);
-  background: #f1f5f9;
+  box-shadow: 0 6px 20px rgba(30, 58, 138, 0.3);
+  background: var(--primary-hover);
 }
 
 .button:disabled {
-  background: rgba(255, 255, 255, 0.05);
-  color: rgba(255, 255, 255, 0.2);
+  background: #e5e7eb;
+  color: #9ca3af;
   box-shadow: none;
   cursor: not-allowed;
 }
 
 .error {
-  color: #f87171;
-  background-color: rgba(248, 113, 113, 0.08);
-  border: 1px solid rgba(248, 113, 113, 0.2);
+  color: #ef4444;
+  background-color: rgba(239, 68, 68, 0.04);
+  border: 1px solid rgba(239, 68, 68, 0.15);
   padding: 0.85rem;
   border-radius: 12px;
   margin-bottom: 2rem;
@@ -128,7 +126,7 @@
   right: 14px;
   background: none;
   border: none;
-  color: #64748b;
+  color: #6b7280;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -139,7 +137,7 @@
 }
 
 .togglePasswordButton:hover {
-  color: #ffffff;
+  color: #1A1A1A;
   transform: scale(1.05);
 }
 
@@ -149,12 +147,12 @@
 }
 
 .loginText {
-  color: #94a3b8;
+  color: #4b5563;
   font-size: 0.9rem;
 }
 
 .loginLink {
-  color: var(--primary-hover);
+  color: var(--primary);
   text-decoration: none;
   font-weight: 600;
   margin-left: 0.25rem;
@@ -162,12 +160,12 @@
 }
 
 .loginLink:hover {
-  color: #ffffff;
+  color: var(--primary-hover);
   text-decoration: underline;
 }
 
 .errorText {
-  color: #f87171;
+  color: #ef4444;
   font-size: 0.8rem;
   margin-top: 0.4rem;
   display: block;
