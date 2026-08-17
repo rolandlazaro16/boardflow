@@ -6,6 +6,7 @@ dotenv.config();
 
 const sampleBooks = [
   {
+    bookNumber: 'BF-1001',
     title: 'The Little Lady of the Big House',
     author: 'Jack London',
     description: 'A novel by American writer Jack London, his last to be published during his lifetime.',
@@ -14,6 +15,7 @@ const sampleBooks = [
     categories: ['Psychological', 'Romance']
   },
   {
+    bookNumber: 'BF-1002',
     title: 'The Wonderful Wizard of Oz',
     author: 'Lyman Frank Baum',
     description: 'An American children\'s novel originally published in 1900.',
@@ -22,6 +24,7 @@ const sampleBooks = [
     categories: ['Fantasy', 'Fantasy & Magic']
   },
   {
+    bookNumber: 'BF-1003',
     title: 'Peter and Wendy',
     author: 'James Mathew Barrie',
     description: 'The story of Peter Pan, a mischievous little boy who can fly.',
@@ -30,6 +33,7 @@ const sampleBooks = [
     categories: ['Fantasy', 'Fairy Tales & Folklore', 'Fantasy & Magic']
   },
   {
+    bookNumber: 'BF-1004',
     title: 'Anna Karenina',
     author: 'Graf Leo Tolstoy',
     description: 'A novel by the Russian writer Leo Tolstoy, published in serial installments.',
@@ -38,6 +42,7 @@ const sampleBooks = [
     categories: ['Classics', 'Literary', 'Psychological', 'Romance', 'Social Life']
   },
   {
+    bookNumber: 'BF-1005',
     title: 'The Sea Wolf',
     author: 'Jack London',
     description: 'An adventure novel by Jack London about a literary critic who survives a collision.',
@@ -46,6 +51,7 @@ const sampleBooks = [
     categories: ['Action & Adventure', 'Sea Stories']
   },
   {
+    bookNumber: 'BF-1006',
     title: 'Jane Eyre',
     author: 'Charlotte Bronte',
     description: 'A novel by English writer Charlotte Brontë, published under the pen name Currer Bell.',

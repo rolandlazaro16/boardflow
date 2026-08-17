@@ -20,6 +20,7 @@ interface Book {
   pdfUrl?: string;
   coverImage?: string;
   categories?: string[];
+  bookNumber?: string;
 }
 
 interface BookRequest {
@@ -43,6 +44,7 @@ export default function AdminDashboard() {
   const [pdfUrl, setPdfUrl] = useState('');
   const [coverImage, setCoverImage] = useState('');
   const [categories, setCategories] = useState('');
+  const [bookNumber, setBookNumber] = useState('');
   const [uploading, setUploading] = useState(false);
 
   const router = useRouter();
@@ -208,7 +210,8 @@ export default function AdminDashboard() {
           description,
           pdfUrl,
           coverImage,
-          categories: categoriesArray
+          categories: categoriesArray,
+          bookNumber: bookNumber || undefined
         })
       });
       setTitle('');
@@ -217,6 +220,7 @@ export default function AdminDashboard() {
       setPdfUrl('');
       setCoverImage('');
       setCategories('');
+      setBookNumber('');
       loadBooks();
     } catch (error: any) {
       alert(error.message);
@@ -305,6 +309,7 @@ export default function AdminDashboard() {
             <table className={styles.table}>
               <thead>
                 <tr>
+                  <th>Number</th>
                   <th>Title</th>
                   <th>Author</th>
                   <th>Actions</th>
@@ -313,6 +318,7 @@ export default function AdminDashboard() {
               <tbody>
                 {books.map(book => (
                   <tr key={book._id}>
+                    <td><span style={{ fontSize: '0.8rem', color: '#94a3b8', fontWeight: 600 }}>{book.bookNumber || 'N/A'}</span></td>
                     <td>{book.title}</td>
                     <td>{book.author}</td>
                     <td>
@@ -340,6 +346,10 @@ export default function AdminDashboard() {
                   style={{ display: 'block', marginTop: '0.5rem' }} 
                 />
                 {uploading && <p style={{ fontSize: '0.85rem', color: '#666', marginTop: '0.25rem' }}>Uploading and analyzing PDF...</p>}
+              </div>
+              <div className={styles.formGroup}>
+                <label className={styles.label}>Book Number (e.g. BF-1007, optional)</label>
+                <input className={styles.input} type="text" value={bookNumber} onChange={e => setBookNumber(e.target.value)} placeholder="Auto-generated if empty" />
               </div>
               <div className={styles.formGroup}>
                 <label className={styles.label}>Title</label>

@@ -135,8 +135,8 @@ export default function RegisterPage() {
               onBlur={() => setContactTouched(true)}
               required 
             />
-            {contactErrorText && (
-              <span style={{ color: 'red', fontSize: '0.85rem', marginTop: '0.25rem', display: 'block' }}>
+             {contactErrorText && (
+              <span className={styles.errorText}>
                 {contactErrorText}
               </span>
             )}
@@ -177,15 +177,15 @@ export default function RegisterPage() {
               </button>
             </div>
             {passwordErrorText && (
-              <span style={{ color: 'red', fontSize: '0.85rem', marginTop: '0.25rem', display: 'block' }}>
+              <span className={styles.errorText}>
                 {passwordErrorText}
               </span>
             )}
           </div>
           <button className={styles.button} type="submit" disabled={!isContactValid || !isPasswordValid}>Register</button>
-          <div style={{ marginTop: '1.5rem', textAlign: 'center' }}>
-            <p style={{ color: '#555' }}>
-              Already have an account? <Link href="/login" style={{ color: '#0070f3', textDecoration: 'none', fontWeight: 'bold' }}>Login Here</Link>
+          <div className={styles.loginTextContainer}>
+            <p className={styles.loginText}>
+              Already have an account? <Link href="/login" className={styles.loginLink}>Login Here</Link>
             </p>
           </div>
         </form>

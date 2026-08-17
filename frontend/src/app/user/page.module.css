@@ -1,197 +1,271 @@
 .container {
-  padding: 2rem;
+  padding: 3rem 2rem;
   max-width: 1200px;
   margin: 0 auto;
+  animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
+  margin-bottom: 3.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
 }
 
 .title {
-  font-size: 2rem;
-  color: #333;
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #ffffff 0%, #a1a1aa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .logoutButton {
-  padding: 0.5rem 1rem;
-  background-color: #e53e3e;
-  color: white;
-  border: none;
-  border-radius: 4px;
+  padding: 0.7rem 1.4rem;
+  background-color: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
   cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.logoutButton:hover {
+  background-color: #ef4444;
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+  transform: translateY(-2px);
 }
 
 .section {
-  margin-bottom: 3rem;
+  margin-bottom: 4rem;
 }
 
 .sectionTitle {
+  font-family: var(--font-display);
   font-size: 1.5rem;
-  margin-bottom: 1rem;
-  color: #444;
-  border-bottom: 2px solid #eaeaea;
-  padding-bottom: 0.5rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: #ffffff;
+  position: relative;
+  display: inline-block;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.5rem;
-}
-
-.card {
-  background: white;
-  border: 1px solid #eaeaea;
-  border-radius: 8px;
-  padding: 1.5rem;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-}
-
-.bookTitle {
-  font-size: 1.25rem;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-}
-
-.bookAuthor {
-  color: #666;
-  margin-bottom: 1rem;
-}
-
-.button {
-  padding: 0.5rem 1rem;
-  background-color: #0070f3;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
-.statusPending {
-  color: #d69e2e;
-  font-weight: bold;
-}
-
-.statusApproved {
-  color: #38a169;
-  font-weight: bold;
-}
-
-.statusRejected {
-  color: #e53e3e;
-  font-weight: bold;
-}
-
-.actionButtons {
-  display: flex;
-  gap: 0.5rem;
-  margin-top: 1rem;
-}
-
-.readButton {
-  background-color: #38a169;
-  color: white;
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 4px;
-  text-decoration: none;
-  text-align: center;
-  cursor: pointer;
-}
-
-.downloadButton {
-  background-color: #3182ce;
-  color: white;
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 4px;
-  text-decoration: none;
-  text-align: center;
-  cursor: pointer;
+.sectionTitle::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 40px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+  border-radius: 2px;
 }
 
 .requestsGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 1.5rem;
 }
 
 .requestCard {
-  background: white;
-  border: 1px solid #eaeaea;
-  border-radius: 8px;
-  padding: 1.5rem;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 1.75rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Redesigned available books styles */
+.requestCard:hover {
+  transform: translateY(-4px);
+  border-color: rgba(99, 102, 241, 0.25);
+  box-shadow: 0 15px 30px rgba(99, 102, 241, 0.1);
+}
+
+.bookTitle {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+  color: #ffffff;
+}
+
+.bookAuthor {
+  color: #94a3b8;
+  font-size: 0.9rem;
+  margin-bottom: 1.25rem;
+}
+
+.statusPending {
+  color: #fbbf24;
+  font-weight: 600;
+  background: rgba(251, 191, 36, 0.1);
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+}
+
+.statusApproved {
+  color: #34d399;
+  font-weight: 600;
+  background: rgba(52, 211, 153, 0.1);
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+}
+
+.statusRejected {
+  color: #f87171;
+  font-weight: 600;
+  background: rgba(248, 113, 113, 0.1);
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+}
+
+.actionButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.readButton {
+  background: #10b981;
+  color: white;
+  padding: 0.55rem 1.1rem;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.readButton:hover {
+  background: #059669;
+  transform: translateY(-1px);
+}
+
+.downloadButton {
+  background: #3b82f6;
+  color: white;
+  padding: 0.55rem 1.1rem;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.downloadButton:hover {
+  background: #2563eb;
+  transform: translateY(-1px);
+}
+
+.button {
+  padding: 0.55rem 1.1rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.button:hover:not(:disabled) {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-1px);
+}
 
 .searchBarContainer {
   display: flex;
   align-items: center;
   margin-bottom: 2rem;
-  max-width: 400px;
+  max-width: 480px;
+  position: relative;
 }
 
 .searchBar {
   flex-grow: 1;
-  padding: 0.5rem 1rem;
-  border: 1px solid #ccc;
-  border-radius: 4px 0 0 4px;
+  padding: 0.75rem 1.25rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px 0 0 14px;
   outline: none;
-  font-size: 1rem;
-  height: 40px;
-  color: #333;
+  font-size: 0.95rem;
+  height: 48px;
+  color: #ffffff;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.searchBar:focus {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
 }
 
 .searchButton {
-  background-color: #5c6ac4;
+  background-color: var(--primary);
   color: white;
   border: none;
-  border-radius: 0 4px 4px 0;
-  width: 40px;
-  height: 40px;
+  border-radius: 0 14px 14px 0;
+  width: 52px;
+  height: 48px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.searchButton:hover {
+  background-color: var(--primary-hover);
 }
 
 .tableContainer {
-  border: 1px solid #eaeaea;
-  border-radius: 4px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
   overflow: hidden;
-  background: white;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  background: rgba(20, 20, 30, 0.4);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
 }
 
 .tableHeader {
   display: grid;
   grid-template-columns: 3.5fr 3.5fr 2fr 1.5fr;
-  padding: 1rem;
-  background-color: #f7f7f7;
+  padding: 1.25rem 1.75rem;
+  background-color: rgba(255, 255, 255, 0.02);
   font-size: 0.75rem;
-  color: #a0aec0;
+  color: #64748b;
   font-weight: bold;
-  letter-spacing: 0.05em;
-  border-bottom: 1px solid #eaeaea;
+  letter-spacing: 0.1em;
+  border-bottom: 1px solid var(--border);
 }
 
 .tableRow {
   display: grid;
   grid-template-columns: 3.5fr 3.5fr 2fr 1.5fr;
-  padding: 1rem;
+  padding: 1.5rem 1.75rem;
   align-items: center;
-  border-bottom: 1px solid #eaeaea;
+  border-bottom: 1px solid var(--border);
+  transition: background-color 0.2s;
+}
+
+.tableRow:hover {
+  background-color: rgba(255, 255, 255, 0.01);
 }
 
 .tableRow:last-child {
@@ -201,22 +275,27 @@
 .colItemVal {
   display: flex;
   align-items: center;
-  gap: 1.25rem;
+  gap: 1.5rem;
 }
 
 .coverImage {
-  width: 50px;
-  height: 70px;
+  width: 54px;
+  height: 76px;
   object-fit: cover;
-  border-radius: 2px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border: 1px solid #eee;
+  border-radius: 8px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s;
+}
+
+.tableRow:hover .coverImage {
+  transform: scale(1.05) rotate(1deg);
 }
 
 .tableBookTitle {
-  font-family: monospace, Courier, monospace;
   font-size: 1.05rem;
-  color: #4a4a4a;
+  font-weight: 600;
+  color: #ffffff;
 }
 
 .colCategoryVal {
@@ -226,30 +305,27 @@
 }
 
 .categoryBadge {
-  background-color: #5c6ac4;
-  color: white;
-  padding: 0.25rem 0.5rem;
-  border-radius: 4px;
-  font-size: 0.7rem;
-  font-weight: bold;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: rgba(99, 102, 241, 0.1);
+  color: #a5b4fc;
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  padding: 0.3rem 0.65rem;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.2s, transform 0.1s;
+  transition: all 0.2s;
 }
 
 .categoryBadge:hover {
-  background-color: #4954a4;
+  background-color: var(--primary);
+  color: white;
+  border-color: var(--primary);
   transform: translateY(-1px);
 }
 
-.categoryBadge:active {
-  transform: translateY(0);
-}
-
 .colAuthorVal {
-  color: #4a4a4a;
+  color: #94a3b8;
   font-size: 0.95rem;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
 .colActionVal {
@@ -258,24 +334,41 @@
 }
 
 .requestButton {
-  padding: 0.4rem 0.8rem;
-  background-color: #5c6ac4;
+  padding: 0.55rem 1.1rem;
+  background-color: var(--primary);
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 10px;
   font-size: 0.85rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 10px rgba(99, 102, 241, 0.2);
 }
 
 .requestButton:hover:not(:disabled) {
-  background-color: #4954a4;
+  background-color: var(--primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 15px rgba(99, 102, 241, 0.3);
 }
 
 .requestButton:disabled {
-  background-color: #cbd5e0;
-  color: #718096;
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #64748b;
+  box-shadow: none;
   cursor: not-allowed;
 }
 
+@media (max-width: 900px) {
+  .tableHeader {
+    display: none;
+  }
+  .tableRow {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1.5rem;
+  }
+  .colActionVal {
+    justify-content: flex-start;
+  }
+}

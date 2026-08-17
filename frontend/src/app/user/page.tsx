@@ -13,6 +13,7 @@ interface Book {
   pdfUrl: string;
   coverImage?: string;
   categories?: string[];
+  bookNumber?: string;
 }
 
 interface BookRequest {
@@ -121,6 +122,7 @@ export default function UserDashboard() {
   const filteredBooks = books.filter(book =>
     book.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
     book.author.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    (book.bookNumber && book.bookNumber.toLowerCase().includes(searchQuery.toLowerCase())) ||
     (book.categories && book.categories.some(cat => cat.toLowerCase().includes(searchQuery.toLowerCase())))
   );
 
@@ -200,7 +202,10 @@ export default function UserDashboard() {
                     {book.coverImage && (
                       <img src={book.coverImage} alt={book.title} className={styles.coverImage} />
                     )}
-                    <span className={styles.tableBookTitle}>{book.title}</span>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
+                      <span style={{ fontSize: '0.75rem', color: '#94a3b8', fontWeight: 600 }}>{book.bookNumber || 'N/A'}</span>
+                      <span className={styles.tableBookTitle}>{book.title}</span>
+                    </div>
                   </div>
                   <div className={styles.colCategoryVal}>
                     {book.categories && book.categories.map((cat, idx) => (
